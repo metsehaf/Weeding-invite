@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited!</title>
+    
+    <!-- Open Graph (OG) Meta Tags for Link Previews -->
+    <meta property="og:title" content="Mr. X & Mrs. Y Wedding Invitation">
+    <meta property="og:description" content="You are invited to celebrate our special day with us.">
+    <meta property="og:image" content="https://placehold.co/600x400/8c7c73/ffffff?text=Wedding+Preview+Image">
+    <meta property="og:url" content="https://your-username.github.io/your-repo-name/">
+
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3f1;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        /* Custom styles for the invitation card */
+        .invitation-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="invitation-card container">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">You're Invited!</h1>
+        <div id="personalized-message" class="text-2xl text-gray-600 mb-6 font-semibold">
+            <!-- This text will be replaced by JavaScript -->
+            The Family, you are invited to celebrate with us!
+        </div>
+
+        <!-- New Default Image of a Bride and Groom -->
+        <img id="couple-image" src="https://placehold.co/600x400/8c7c73/ffffff?text=Bride+%26+Groom" alt="Image of the couple" class="w-full h-auto rounded-lg shadow-lg mb-6">
+
+        <div class="text-lg text-gray-700 leading-relaxed">
+            <p class="mb-4">
+                We are so excited to invite you to celebrate our special day. Your presence means the world to us.
+            </p>
+            <p class="mb-6">
+                Please join us as we begin our new journey together.
+            </p>
+        </div>
+
+        <!-- Venue Details -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Venue & Details</h2>
+            <p class="text-xl text-gray-700 font-semibold mb-1">Saturday, September 21, 2025</p>
+            <p class="text-lg text-gray-600 mb-1">5:00 PM</p>
+            <p class="text-lg text-gray-600 font-semibold mb-2">
+                [Venue Name]
+                <br>
+                [Venue Address]
+            </p>
+            <!-- Google Maps Link -->
+            <a href="https://maps.google.com/?q=[Venue+Address]" target="_blank" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                View on Google Maps
+            </a>
+        </div>
+
+        <!-- RSVP Button -->
+        <a href="mailto:[your_email_address]?subject=RSVP%20for%20Your%20Wedding&body=I%20will%20be%20attending%20your%20wedding!" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-6">
+            RSVP Now
+        </a>
+
+        <!-- Disclaimer -->
+        <div class="text-sm text-red-500 mb-6">
+            <p>
+                Due to venue capacity, we kindly request no additional guests. Your invitation is for the family members listed on your link. Thank you for understanding!
+            </p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="text-sm text-gray-500">
+            <p class="mb-1">For any questions, feel free to reach out:</p>
+            <p>Email: <a href="mailto:[your_email_address]" class="underline">[your_email_address]</a></p>
+            <p>Phone: <a href="tel:[your_phone_number]" class="underline">[your_phone_number]</a></p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner mt-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Our Story</h2>
+            <p class="text-gray-600 italic">
+                A brief look back at our relationship journey.
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                It all started with a simple meeting...
+                [Insert a beautiful, personal biography here]
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Get the value of the 'name' parameter
+        let guestName = urlParams.get('name');
+
+        // Find the element to display the message
+        const messageElement = document.getElementById('personalized-message');
+
+        if (guestName) {
+            // Replace '+' with spaces and update the message
+            guestName = decodeURIComponent(guestName.replace(/\+/g, ' '));
+            messageElement.innerText = `${guestName}, you are invited to celebrate with us!`;
+        }
+    </script>
+
+</body>
+</html>
