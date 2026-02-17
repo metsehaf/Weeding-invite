@@ -3,119 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You're Invited!</title>
+    <title>Girum & Edom - Wedding Invitation</title>
     
     <!-- Open Graph (OG) Meta Tags for Link Previews -->
-    <meta property="og:title" content="Mr. X & Mrs. Y Wedding Invitation">
+    <meta property="og:title" content="Girum & Edom Wedding Invitation">
     <meta property="og:description" content="You are invited to celebrate our special day with us.">
-    <meta property="og:image" content="https://placehold.co/600x400/8c7c73/ffffff?text=Wedding+Preview+Image">
-    <meta property="og:url" content="https://your-username.github.io/your-repo-name/">
+    <meta property="og:image" content="https://placehold.co/1200x630/e4dccc/333333?text=Girum+%26+Edom+Wedding">
+    <meta property="og:url" content="https://metsehaf.github.io/Weeding-invite/">
 
-    <!-- Tailwind CSS CDN for easy styling -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f3f1;
+        .font-serif-elegant {
+            font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
+
+        /* Hero Image - Split Screen Layout */
+        #hero-image {
+            background-image: url('https://placehold.co/1000x1200/8c7c73/ffffff?text=Girum+%26+Edom');
+            background-size: cover;
+            background-position: center;
         }
-        /* Custom styles for the invitation card */
-        .invitation-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
+
+        /* Gold Texture Background for the bottom right */
+        .gold-texture {
+            background: linear-gradient(to bottom right, #d4af37, #fcf6ba, #d4af37, #aa771c);
+            opacity: 0.3;
+        }
+
+        /* Custom Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* RSVP Button Style from Image */
+        .btn-rsvp {
+            border: 1px solid #8c7c73;
+            color: #8c7c73;
+            padding: 0.5rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.875rem;
+        }
+        .btn-rsvp:hover {
+            background-color: #8c7c73;
+            color: white;
+        }
+        
+        /* Sticky Nav Bar */
+        #sticky-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 50;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+<body class="bg-[#FDFBF9] text-gray-800">
 
-    <div class="invitation-card container">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">You're Invited!</h1>
-        <div id="personalized-message" class="text-2xl text-gray-600 mb-6 font-semibold">
-            <!-- This text will be replaced by JavaScript -->
-            The Family, you are invited to celebrate with us!
-        </div>
+    <!-- 1. Split Screen Hero Section (Directly from User Image) -->
+    <main class="lg:flex lg:h-screen lg:overflow-hidden">
+        
+        <!-- Left Side: Image with Overlay Names -->
+        <section id="hero-image" class="relative w-full lg:w-3/5 h-[60vh] lg:h-full">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute bottom-10 left-10 text-white z-10">
+                <h1 class="text-5xl lg:text-7xl font-serif-elegant mb-2">Girum & Edom</h1>
+                <p id="personalized-message" class="text-sm lg:text-base font-light opacity-90">
+                    We can't wait to share our special day with you. Help us capture our wedding with Joy.
+                </p>
+            </div>
+        </section>
 
-        <!-- New Default Image of a Bride and Groom -->
-        <img id="couple-image" src="https://placehold.co/600x400/8c7c73/ffffff?text=Bride+%26+Groom" alt="Image of the couple" class="w-full h-auto rounded-lg shadow-lg mb-6">
+        <!-- Right Side: Details & RSVP -->
+        <section class="w-full lg:w-2/5 flex flex-col justify-center items-center p-10 bg-[#FDFBF9] relative">
+            <div class="text-center z-10">
+                <p class="text-2xl font-serif-elegant text-[#8c7c73] mb-1">Saturday</p>
+                <p class="text-xl font-bold font-serif-elegant text-[#8c7c73] mb-1">August 1, 2026</p>
+                <p class="text-lg text-[#8c7c73]/80 mb-8 tracking-wide">Toronto, ON, Canada</p>
 
-        <div class="text-lg text-gray-700 leading-relaxed">
-            <p class="mb-4">
-                We are so excited to invite you to celebrate our special day. Your presence means the world to us.
-            </p>
-            <p class="mb-6">
-                Please join us as we begin our new journey together.
-            </p>
-        </div>
+                <a href="#rsvp" class="btn-rsvp inline-block mb-8">RSVP</a>
+
+                <div class="flex flex-col items-center">
+                    <a href="#details" class="text-xs uppercase tracking-widest text-[#8c7c73] mb-4">View Details</a>
+                    <svg class="w-8 h-4 text-[#8c7c73]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Decorative Gold Corner -->
+            <div class="absolute bottom-0 right-0 w-full h-1/4 gold-texture pointer-events-none"></div>
+        </section>
+    </main>
+
+    <!-- 2. Detailed Content Section -->
+    <div id="details" class="p-8 lg:p-24 space-y-20 max-w-5xl mx-auto pb-32">
+        
+        <!-- Countdown -->
+        <section class="text-center">
+            <h2 class="text-3xl font-serif-elegant mb-10 text-gray-700">The Countdown Begins</h2>
+            <div id="countdown-timer" class="flex justify-center space-x-4 lg:space-x-10">
+                <div class="flex flex-col"><span id="days" class="text-4xl font-bold">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Days</span></div>
+                <div class="flex flex-col"><span id="hours" class="text-4xl font-bold">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Hours</span></div>
+                <div class="flex flex-col"><span id="minutes" class="text-4xl font-bold">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Mins</span></div>
+                <div class="flex flex-col"><span id="seconds" class="text-4xl font-bold">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Secs</span></div>
+            </div>
+        </section>
 
         <!-- Venue Details -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Venue & Details</h2>
-            <p class="text-xl text-gray-700 font-semibold mb-1">Saturday, September 21, 2025</p>
-            <p class="text-lg text-gray-600 mb-1">5:00 PM</p>
-            <p class="text-lg text-gray-600 font-semibold mb-2">
-                [Venue Name]
-                <br>
-                [Venue Address]
-            </p>
-            <!-- Google Maps Link -->
-            <a href="https://maps.google.com/?q=[Venue+Address]" target="_blank" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
-                View on Google Maps
-            </a>
-        </div>
+        <section class="grid lg:grid-cols-2 gap-12 border-t pt-20">
+            <div>
+                <h3 class="text-2xl font-serif-elegant mb-4">The Venue</h3>
+                <p class="text-lg text-gray-600 mb-6">
+                    [Venue Name]<br>
+                    [Address Line 1]<br>
+                    Toronto, ON
+                </p>
+                <a href="https://maps.google.com/?q=Toronto" target="_blank" class="text-[#8c7c73] font-semibold underline underline-offset-4">Get Directions</a>
+            </div>
+            <div>
+                <h3 class="text-2xl font-serif-elegant mb-4">Contact Info</h3>
+                <p class="text-gray-600 mb-2">For any inquiries, feel free to reach out:</p>
+                <p class="font-bold">Email: <a href="mailto:wedding@example.com" class="text-[#8c7c73]">wedding@example.com</a></p>
+                <p class="font-bold">Phone: <a href="tel:5551234567" class="text-[#8c7c73]">(555) 123-4567</a></p>
+            </div>
+        </section>
 
-        <!-- RSVP Button -->
-        <a href="mailto:[your_email_address]?subject=RSVP%20for%20Your%20Wedding&body=I%20will%20be%20attending%20your%20wedding!" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-6">
-            RSVP Now
-        </a>
-
-        <!-- Disclaimer -->
-        <div class="text-sm text-red-500 mb-6">
-            <p>
-                Due to venue capacity, we kindly request no additional guests. Your invitation is for the family members listed on your link. Thank you for understanding!
-            </p>
-        </div>
-
-        <!-- Contact Information -->
-        <div class="text-sm text-gray-500">
-            <p class="mb-1">For any questions, feel free to reach out:</p>
-            <p>Email: <a href="mailto:[your_email_address]" class="underline">[your_email_address]</a></p>
-            <p>Phone: <a href="tel:[your_phone_number]" class="underline">[your_phone_number]</a></p>
-        </div>
-
-        <div class="bg-gray-50 p-6 rounded-lg shadow-inner mt-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Our Story</h2>
-            <p class="text-gray-600 italic">
-                A brief look back at our relationship journey.
-            </p>
-            <p class="text-sm text-gray-500 mt-2">
-                It all started with a simple meeting...
-                [Insert a beautiful, personal biography here]
-            </p>
-        </div>
+        <!-- RSVP Form Section -->
+        <section id="rsvp" class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 max-w-lg mx-auto">
+            <h2 class="text-4xl font-serif-elegant text-center mb-8">RSVP</h2>
+            <p class="text-center text-xs tracking-widest uppercase mb-10">Please respond by June 1, 2026</p>
+            
+            <form onsubmit="handleRSVP(event)" class="space-y-6">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Full Name</label>
+                    <input type="text" id="name" required class="w-full border-b border-gray-300 py-2 focus:border-[#8c7c73] outline-none bg-transparent">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-4">Will you attend?</label>
+                    <div class="flex space-x-6">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="attending" value="Yes" required class="accent-[#8c7c73]">
+                            <span>Yes, I'll be there</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="attending" value="No" class="accent-[#8c7c73]">
+                            <span>Regretfully Decline</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Number of Guests</label>
+                    <input type="number" id="guests" value="1" min="1" max="5" class="w-full border-b border-gray-300 py-2 focus:border-[#8c7c73] outline-none bg-transparent">
+                </div>
+                <button type="submit" class="w-full bg-[#8c7c73] text-white py-4 rounded-lg uppercase tracking-widest font-bold hover:bg-[#6b5e56] transition">Submit RSVP</button>
+            </form>
+        </section>
     </div>
 
+    <!-- Sticky Nav -->
+    <nav id="sticky-nav" class="lg:hidden flex justify-around p-4 text-[#8c7c73]">
+        <a href="#hero-image" class="text-[10px] uppercase font-bold text-center flex flex-col items-center">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Home
+        </a>
+        <a href="#details" class="text-[10px] uppercase font-bold text-center flex flex-col items-center">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path></svg>
+            Details
+        </a>
+        <a href="#rsvp" class="text-[10px] uppercase font-bold text-center flex flex-col items-center">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            RSVP
+        </a>
+    </nav>
+
     <script>
-        // Get the URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // Get the value of the 'name' parameter
-        let guestName = urlParams.get('name');
-
-        // Find the element to display the message
-        const messageElement = document.getElementById('personalized-message');
-
-        if (guestName) {
-            // Replace '+' with spaces and update the message
-            guestName = decodeURIComponent(guestName.replace(/\+/g, ' '));
-            messageElement.innerText = `${guestName}, you are invited to celebrate with us!`;
+        // 1. Personalized Greeting
+        const params = new URLSearchParams(window.location.search);
+        const guest = params.get('name');
+        if (guest) {
+            const decodedName = decodeURIComponent(guest.replace(/\+/g, ' '));
+            document.getElementById('personalized-message').innerText = 
+                `${decodedName}, we can't wait to share our special day with you. Help us capture our wedding with Joy.`;
         }
-    </script>
 
+        // 2. RSVP Email Handler
+        function handleRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const attending = document.querySelector('input[name="attending"]:checked').value;
+            const guests = document.getElementById('guests').value;
+            
+            const subject = encodeURIComponent(`RSVP: ${attending} - ${name}`);
+            const body = encodeURIComponent(`Guest Name: ${name}\nAttending: ${attending}\nTotal Guests: ${guests}`);
+            
+            window.location.href = `mailto:wedding@example.com?subject=${subject}&body=${body}`;
+        }
+
+        // 3. Countdown Timer
+        const targetDate = new Date("August 1, 2026 17:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0'+s : s;
+        }, 1000);
+    </script>
 </body>
 </html>
