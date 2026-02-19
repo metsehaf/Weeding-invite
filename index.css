@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap");
+
+:root {
+    --primary-gold: #c5a059;
+    --bg-cream: #f8f5f0;
+    /* Soft cream from your image */
+    --text-brown: #8c7c73;
+    --envelope-cream: #ffffff;
+    --wax-gold: #c5a059;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: var(--bg-cream);
+    overflow-x: hidden;
+}
+
+.font-serif-elegant {
+    font-family: "Playfair Display", serif;
+}
+
+#envelope-wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: #f3f0ec;
+    /* The very outer light background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4vh;
+    z-index: 100;
+}
+
+.envelope {
+    position: relative;
+    width: min(90vw, 420px);
+    aspect-ratio: 4 / 6;
+    /* Shorter ratio */
+
+    border: 10px solid #111;
+    border-radius: 38px;
+    overflow: hidden;
+
+    background: #fff;
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.08),
+        0 10px 20px rgba(0, 0, 0, 0.05);
+
+    cursor: pointer;
+}
+
+
+.envelope-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.envelope.open::before {
+    transform: rotateX(160deg);
+    z-index: 1;
+    /* Move behind content when open */
+}
+
+.envelope.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(0.5);
+}
+
+.wax-seal {
+    position: absolute;
+    top: 60%;
+    /* Perfect center where all SVG lines meet */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-image: url('./assets/wax_removed.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Soft shadow to lift it off the paper */
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+}
+
+.wax-initials {
+    color: #3d3d3d;
+    font-weight: bold;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.initial-divider {
+    width: 1.5px;
+    height: 22px;
+    background: #3d3d3d;
+}
+
+@media (max-width: 640px) {
+    #envelope-wrapper {
+        position: fixed;
+        inset: 0;
+        background: none;   /* remove wrapper color */
+        padding: 0;
+        margin: 0;
+    }
+
+    .envelope {
+        position: fixed;
+        inset: 0;
+
+        width: 100vw;
+        height: 100dvh;
+
+        border: none;          /* remove black frame */
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    .envelope-svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .wax-seal {
+        top: 55%;
+        left: 35%;
+        width: 150px;
+        height: 150px;
+    }
+
+    .wax-initials {
+        /* No longer need to rotate initials since envelope isn't rotated */
+        transform: none;
+        font-size: 2rem;
+    }
+
+    /* Fix hover for mobile to avoid jumping */
+    .wax-seal:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+
+.wax-seal:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+@media (max-width: 640px) {
+    .wax-seal:hover {
+        transform: translate(-50%, -50%) rotate(-90deg) scale(1.05);
+    }
+}
+
+.envelope.open .wax-seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Slide Out Animation */
+.page-out {
+    transform: translateY(-100vh);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- CONTENT STYLES --- */
+#hero-image {
+    background-image: url("https://placehold.co/1000x1200/8c7c73/ffffff?text=Girum+%26+Edom");
+    background-size: cover;
+    background-position: center;
+}
+
+.gold-texture {
+    background: linear-gradient(to bottom right,
+            #d4af37,
+            #fcf6ba,
+            #d4af37,
+            #aa771c);
+    opacity: 0.25;
+}
+
+.btn-rsvp {
+    border: 1px solid var(--text-brown);
+    color: var(--text-brown);
+    padding: 0.6rem 2.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+.btn-rsvp:hover {
+    background-color: var(--text-brown);
+    color: white;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
