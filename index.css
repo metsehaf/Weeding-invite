@@ -20,23 +20,51 @@ body {
     font-family: "Playfair Display", serif;
 }
 
+#scene {
+    display: flex;
+    width: 200%;
+    height: 100vh;
+    transition: transform 1.5s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#envelope-wrapper,
+#main-content {
+    flex: 0 0 50%;
+    height: 100%;
+}
+
 #envelope-wrapper {
-    position: fixed;
-    inset: 0;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
-    transition: transform 1s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.8s ease;
+    transition:
+        transform 1s cubic-bezier(0.87, 0, 0.13, 1),
+        opacity 0.8s ease;
     padding: 20px;
-
     /* Realistic Table: Wood Grain Texture */
     background-color: var(--table-wood);
     background-image:
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0, 0, 0, 0.05) 41px, transparent 42px),
-        repeating-linear-gradient(0deg, var(--table-wood), var(--table-grain) 100px, var(--table-wood) 200px);
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 40px,
+            rgba(0, 0, 0, 0.05) 41px,
+            transparent 42px),
+        repeating-linear-gradient(0deg,
+            var(--table-wood),
+            var(--table-grain) 100px,
+            var(--table-wood) 200px);
     box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.6);
     /* Vignette for depth */
+}
+
+
+#main-content {
+    pointer-events: none;
+}
+
+.scene-reveal #main-content {
+    pointer-events: auto;
 }
 
 /* Ambient noise overlay for table texture */
@@ -60,7 +88,8 @@ body {
     overflow: hidden;
 
     background: #fff;
-
+    perspective: 1200px;
+    transform-style: preserve-3d;
     box-shadow:
         0 30px 60px rgba(0, 0, 0, 0.08),
         0 10px 20px rgba(0, 0, 0, 0.05);
@@ -75,21 +104,78 @@ body {
         0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
+.envelope-body {
+    position: absolute;
+    inset: 0;
+    background: var(--envelope-cream);
+    box-shadow:
+        -12px 20px 40px rgba(0, 0, 0, 0.5),
+        -2px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 2;
+}
+
+/* The Card inside the envelope */
+.letter-card {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background: white;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(20%);
+    text-align: center;
+}
+
 .envelope-svg {
     width: 100%;
     height: 100%;
     display: block;
+    position: relative;
+    z-index: 3;
+    /* Above the card */
+    overflow: visible;
 }
 
-.envelope.open::before {
-    transform: rotateX(160deg);
-    z-index: 1;
-    /* Move behind content when open */
+/* Flap Opening Animation */
+#right-flap {
+    transform-origin: 100% 0%;
+    transition: transform 8s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-box: fill-box;
+}
+
+.envelope.open {
+    transform: rotate(-3deg) scale(1.02);
+    transition: transform 1.2s ease;
+}
+
+.envelope.open .letter-card {
+    transform: translateY(-80%);
+}
+
+.envelope.open #right-flap {
+    transform: rotateY(-140deg);
 }
 
 .envelope.open .wax-seal {
+    transform: translate(-50%, -120%) scale(0.6) rotate(-8deg);
     opacity: 0;
-    transform: translate(-50%, -100%) scale(0.5);
+}
+
+.card-slide-out {
+    transform: translateY(-100%);
+}
+
+.scene-reveal {
+    transform: translateX(-50%);
 }
 
 .wax-seal {
@@ -100,7 +186,7 @@ body {
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
-    background-image: url('./assets/wax_removed.png');
+    background-image: url("./assets/wax_removed.png");
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 10;
@@ -109,6 +195,9 @@ body {
     justify-content: center;
     /* Soft shadow to lift it off the paper */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+    transition:
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease;
 }
 
 .wax-initials {
@@ -127,12 +216,17 @@ body {
 }
 
 @media (max-width: 640px) {
-    #envelope-wrapper {
-        position: fixed;
-        inset: 0;
-        /* remove wrapper color */
-        padding: 40px 20px;
-        margin: 0;
+   #scene {
+        width: 100%;
+    }
+
+    #envelope-wrapper,
+    #main-content {
+        flex: 0 0 100%;
+    }
+
+    .scene-reveal {
+        transform: translateX(-100%);
     }
 
     .envelope {
@@ -174,7 +268,6 @@ body {
     }
 }
 
-
 .wax-seal:hover {
     transform: translate(-50%, -50%) scale(1.05);
 }
@@ -186,13 +279,6 @@ body {
 }
 
 .envelope.open .wax-seal {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Slide Out Animation */
-.page-out {
-    transform: translateY(-100vh);
     opacity: 0;
     pointer-events: none;
 }
