@@ -1,18 +1,23 @@
         // 1. Envelope Logic
-        function openEnvelope() {
-            const env = document.getElementById('main-envelope');
-            const wrapper = document.getElementById('envelope-wrapper');
-            const content = document.getElementById('main-content');
-            
-            env.classList.add('open');
-            
-            // Wait for flap animation then slide up the wrapper
-            setTimeout(() => {
-                wrapper.classList.add('page-out');
-                content.classList.remove('opacity-0');
-                document.body.style.overflow = 'auto'; // Re-enable scroll
-            }, 800);
-        }
+function openEnvelope() {
+    const envelope = document.getElementById("main-envelope");
+    const scene = document.getElementById("scene");
+
+    envelope.classList.add("open");
+
+    // Card starts sliding after flap begins
+    setTimeout(() => {
+        envelope.querySelector(".letter-card")
+            .style.transform = "translateY(-120%)";
+                document.getElementById("main-content")
+        .classList.remove("opacity-0");
+    }, 1200);
+
+    // After flap fully opens (8s), slide scene
+    setTimeout(() => {
+        scene.classList.add("scene-reveal");
+    }, 1200);
+}
         
         // Prevent scroll until opened
         document.body.style.overflow = 'hidden';
