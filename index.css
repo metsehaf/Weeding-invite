@@ -4,15 +4,29 @@
     --primary-gold: #c5a059;
     --bg-cream: #f8f5f0;
     /* Soft cream from your image */
+    --bg-burgundy: #2d0505;
+    /* Deep Burgundy */
+    --bg-burgundy-dark: #1a0202;
+    /* Darker variant for gradients */
+    --card-burgundy: #3d0a0a;
     --text-brown: #8c7c73;
     --envelope-cream: #ffffff;
     --wax-gold: #c5a059;
     --table-burgundy: #2d0a0a;
 }
 
+/* Prevent all scrolling by default */
+body.locked {
+    overflow: hidden !important;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    touch-action: none;
+}
+
 body {
     font-family: "Lato", sans-serif;
-    background-color: var(--bg-cream);
+    background-color: var(--bg-burgundy);
     overflow-x: hidden;
 }
 
@@ -43,7 +57,7 @@ body {
         opacity 0.8s ease;
     padding: 20px;
     /* Realistic Table: Wood Grain Texture */
-    background-color: var(--table-wood);
+    background-color: var(--bg-burgundy-dark);
     background-image:
         repeating-linear-gradient(90deg,
             transparent,
@@ -51,9 +65,9 @@ body {
             rgba(0, 0, 0, 0.05) 41px,
             transparent 42px),
         repeating-linear-gradient(0deg,
-            var(--table-wood),
-            var(--table-grain) 100px,
-            var(--table-wood) 200px);
+            var(--bg-burgundy),
+            var(--bg-burgundy-dark) 100px,
+            var(--bg-burgundy-dark) 200px);
     box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.6);
     /* Vignette for depth */
 }
@@ -87,7 +101,7 @@ body {
     border-radius: 38px;
     overflow: hidden;
 
-    background: #fff;
+    background: var(--bg-burgundy);
     perspective: 1200px;
     transform-style: preserve-3d;
     box-shadow:
@@ -98,7 +112,7 @@ body {
 }
 
 .envelope:hover {
-    transform: rotate(-1deg) translateY(-5px) scale(1.02);
+    /* transform: rotate(-1deg) translateY(-5px) scale(1.02); */
     box-shadow:
         -8px 25px 45px rgba(0, 0, 0, 0.5),
         0 10px 15px rgba(0, 0, 0, 0.2);
@@ -107,7 +121,7 @@ body {
 .envelope-body {
     position: absolute;
     inset: 0;
-    background: var(--envelope-cream);
+    background: var(--bg-burgundy);
     box-shadow:
         -12px 20px 40px rgba(0, 0, 0, 0.5),
         -2px 5px 10px rgba(0, 0, 0, 0.3);
@@ -122,7 +136,7 @@ body {
     left: 5%;
     width: 90%;
     height: 90%;
-    background: white;
+    background: #420b0b;
     z-index: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -152,10 +166,10 @@ body {
     transform-box: fill-box;
 }
 
-.envelope.open {
+/* .envelope.open {
     transform: rotate(-3deg) scale(1.02);
     transition: transform 1.2s ease;
-}
+} */
 
 .envelope.open .letter-card {
     transform: translateY(-80%);
@@ -215,8 +229,15 @@ body {
     background: #3d3d3d;
 }
 
+.image-divider {
+    width: 100%;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+}
+
 @media (max-width: 640px) {
-   #scene {
+    #scene {
         width: 100%;
     }
 
@@ -227,20 +248,18 @@ body {
 
     .scene-reveal {
         transform: translateX(-100%);
+        height: 100%;
     }
 
     .envelope {
         position: fixed;
         inset: 0;
-        width: 80vw;
-        height: 75vh;
-        transform: rotate(-5deg);
+        width: 100vw;
+        height: 100vh;
         border: none;
         /* remove black frame */
         border-radius: 0;
         box-shadow: none;
-        margin-top: 5.5rem;
-        margin-left: 2.5rem;
     }
 
     .envelope-svg {
@@ -284,8 +303,8 @@ body {
 }
 
 /* --- CONTENT STYLES --- */
-#hero-image {
-    background-image: url("https://placehold.co/1000x1200/8c7c73/ffffff?text=Girum+%26+Edom");
+.hero-image {
+    background-image: url("./assets/IMG_3306.jpeg");
     background-size: cover;
     background-position: center;
 }
@@ -299,6 +318,69 @@ body {
     opacity: 0.25;
 }
 
+/* --- HERO TRIPTYCH DESIGN --- */
+        .triptych-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+            height: 100vh;
+            padding: 2rem;
+            align-items: center;
+            overflow: hidden;
+            background: var(--bg-burgundy-dark);
+            /* Set the shared background image here */
+            background-image: url('./assets/IMG_3306.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .triptych-panel {
+            position: relative;
+            height: 85vh;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            overflow: hidden;
+            /* Semi-transparent background to let the shared image through */
+            background: rgba(26, 2, 2, 0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .panel-center {
+            height: 95vh;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            background: transparent;
+            backdrop-filter: none;
+        }
+
+        /* Animations */
+        .float-up { animation: floatUp 6s ease-in-out infinite; }
+        .float-down { animation: floatDown 6s ease-in-out infinite; }
+
+        @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes floatDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+
+        .vertical-name {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            position: absolute;
+            top: 2rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.8em;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+            opacity: 0.8;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .triptych-container { grid-template-columns: 1fr; padding: 1rem; }
+            .panel-side { display: none; }
+            .panel-center { height: 80vh; margin-top: 10vh; }
+        }
 .btn-rsvp {
     border: 1px solid var(--text-brown);
     color: var(--text-brown);

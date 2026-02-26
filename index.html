@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="index.css" />
 </head>
 
-<body>
+<body class="locked">
     <!-- 1. Interactive Envelope Intro -->
     <div id="scene">
         <div id="envelope-wrapper">
@@ -60,16 +60,16 @@
                     <rect width="100" height="150" fill="#f5f2ee" />
 
                     <!-- 1. Bottom flap (renders first, stays behind sides) -->
-                    <path d="M0 150 L50 85 L100 150 Z" fill="#f5f2ee" stroke="#e5e1dc" stroke-width="0.3" />
+                    <path d="M0 150 L50 85 L100 150 Z" fill="#350606" stroke="#4a0808" stroke-width="0.3" />
 
                     <!-- 4. Top flap (The one that opens, stays on top initially) -->
-                    <path id="top-flap" d="M0 0 L52 52 L100 -20 Z" fill="#f9f7f5" stroke="#e5e1dc" stroke-width="0.3" />
+                    <path id="top-flap" d="M0 0 L52 52 L100 -20 Z" fill="#3d0a0a" stroke="#4a0808" stroke-width="0.3" />
 
                     <!-- 2. Left fold (Overlays bottom) -->
-                    <path d="M0 0 L90 90 L0 150 Z" fill="#fdfbf9" stroke="#e5e1dc" stroke-width="0.3" />
+                    <path d="M0 0 L90 90 L0 150 Z" fill="#3a0707" stroke="#4a0808" stroke-width="0.3" />
 
                     <!-- 3. Right fold (Overlays bottom) -->
-                    <path id="right-flap" d="M100 -20 L30 85 L100 160 Z" fill="#fdfbf9" stroke="#e5e1dc"
+                    <path id="right-flap" d="M100 -20 L30 85 L100 160 Z" fill="#420b0b" stroke="#4a0808"
                         stroke-width="0.3" filter="url(#flapShadow)" />
 
 
@@ -90,39 +90,50 @@
 
         <!-- 2. Main Invitation (Initially Hidden) -->
         <div id="main-content" class="opacity-0 transition-opacity duration-1000">
-            <!-- Hero Section -->
+
             <main class="lg:flex lg:h-screen lg:overflow-hidden">
-                <!-- Split Left: Image -->
-                <section id="hero-image" class="relative w-full lg:w-3/5 h-[70vh] lg:h-full flex items-end p-8 lg:p-16">
-                    <div class="absolute inset-0 bg-black/30"></div>
-                    <div class="relative z-10 text-white">
-                        <h1 class="text-5xl lg:text-8xl font-serif-elegant mb-4">
-                            Girum & Edom
-                        </h1>
-                        <p id="personalized-message"
-                            class="text-sm lg:text-base font-light opacity-90 max-w-sm leading-relaxed">
-                            We can't wait to share our special day with you. Help us capture
-                            our wedding with Joy.
-                        </p>
+                <!-- Hero Section -->
+                <section class="triptych-container">
+                    <!-- Left Panel -->
+                    <div class="triptych-panel panel-side float-up">
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <span class="vertical-name right-4">GIRUM</span>
+                    </div>
+
+                    <!-- Center Panel -->
+                    <div class="triptych-panel panel-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1a0202] via-transparent to-transparent">
+                        </div>
+                        <div class="relative z-10 text-center space-y-6">
+                            <span class="text-[#c5a059] uppercase tracking-[0.6em] text-[10px] block">We are getting
+                                married</span>
+                            <h1 class="text-5xl lg:text-7xl font-serif-elegant text-white leading-tight">Girum <span
+                                    class="text-[#c5a059]">&</span> Edom</h1>
+                            <p class="text-[11px] text-white/60 tracking-[0.3em] uppercase">August 01, 2026 • Toronto
+                            </p>
+                            <div class="pt-6">
+                                <a href="#rsvp" class="btn-rsvp">Open RSVP</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel -->
+                    <div class="triptych-panel panel-side float-down">
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <span class="vertical-name left-4">EDOM</span>
                     </div>
                 </section>
+                <!-- <section class="image-divider" style="background-image:url('./assets/IMG_3306.jpeg')"></section> -->
 
                 <!-- Split Right: Info -->
                 <section
                     class="w-full lg:w-2/5 flex flex-col justify-center items-center p-12 lg:p-16 bg-[#FDFBF9] relative min-h-[50vh]">
                     <div class="text-center z-10 space-y-2">
-                        <p class="text-xl lg:text-2xl font-serif-elegant text-[#8c7c73] italic">
-                            Saturday
+                        <p id="personalized-message"
+                            class="text-sm lg:text-base font-light opacity-90 max-w-sm leading-relaxed">
+                            We can't wait to share our special day with you. Help us capture
+                            our wedding with Joy.
                         </p>
-                        <p class="text-3xl lg:text-4xl font-bold font-serif-elegant text-[#8c7c73] tracking-tighter">
-                            August 1, 2026
-                        </p>
-                        <p class="text-md lg:text-lg text-[#8c7c73]/70 uppercase tracking-widest pb-10">
-                            Toronto, ON, Canada
-                        </p>
-
-                        <a href="#rsvp" class="btn-rsvp">RSVP</a>
-
                         <div class="flex flex-col items-center pt-16">
                             <a href="#details" class="text-[10px] uppercase tracking-[0.4em] text-[#8c7c73] mb-4">View
                                 Details</a>
@@ -134,8 +145,6 @@
                             </svg>
                         </div>
                     </div>
-                    <!-- Artistic Gold Accent at bottom -->
-                    <div class="absolute bottom-0 right-0 w-full h-1/4 gold-texture pointer-events-none"></div>
                 </section>
             </main>
 
@@ -165,7 +174,7 @@
                         </div>
                     </div>
                 </section>
-
+                <section class="image-divider" style="background-image:url('./assets/IMG_3264.jpeg')"></section>
                 <!-- Venue Info -->
                 <section class="grid md:grid-cols-2 gap-16 border-t border-gray-100 pt-24">
                     <div>
