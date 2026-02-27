@@ -26,7 +26,7 @@ body.locked {
 
 body {
     font-family: "Lato", sans-serif;
-    background-color: var(--bg-burgundy);
+    background-color: var(--envelope-cream);
     overflow-x: hidden;
 }
 

@@ -32,10 +32,23 @@ document.body.style.overflow = 'hidden';
 const params = new URLSearchParams(window.location.search);
 const guestName = params.get('name');
 if (guestName) {
-    const name = decodeURIComponent(guestName.replace(/\+/g, ' '));
+    let names = decodeURIComponent(guestName.replace(/\+/g, ' ')).trim();
+    let finalDisplay;
+
+    // conditional check: split only if "and" is found
+    if (names.toLowerCase().includes('and')) {
+        console.log(names)
+        finalDisplay = names.split('and').map((name) => {
+            const trimmed = name.trim();
+            return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+        }).join(' & ');
+    } else {
+        // 3. Fallback: Just capitalize the single name
+        finalDisplay = names.charAt(0).toUpperCase() + names.slice(1);
+    }
     const msgEl = document.getElementById('personalized-message');
     if (msgEl) {
-        msgEl.innerHTML = `<strong>${name}</strong>, we can't wait to share our special day with you. Help us capture our wedding with Joy.`;
+        msgEl.innerHTML = `<strong>${finalDisplay}</strong>`;
     }
 }
 
