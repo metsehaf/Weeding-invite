@@ -234,6 +234,19 @@ body {
     height: 70vh;
     background-size: cover;
     background-position: center;
+    animation: floatSideToSide 3s ease-in-out infinite;
+}
+
+@keyframes floatSideToSide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px); /* Adjust this for more/less movement */
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 640px) {

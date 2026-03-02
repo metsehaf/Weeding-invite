@@ -73,10 +73,43 @@ setInterval(() => {
 }, 1000);
 
 // 4. RSVP Action
-function handleRSVP(e) {
+async function handleRSVP(e) {
     e.preventDefault();
+    const API_URL = "https://script.google.com/macros/s/AKfycbyZEmoP_S84klNGUj-A22coE1tSBd-0oo-ROBK0kyO1uZbPS33cfhFWPQWhwbNkcqM/exec";
+
     const name = document.getElementById('name').value;
     const attendingRadio = document.querySelector('input[name="attending"]:checked');
-    const status = attendingRadio ? attendingRadio.value : 'No Response';
-    window.location.href = `mailto:wedding@example.com?subject=RSVP: ${status} - ${name}&body=Guest: ${name}%0D%0AStatus: ${status}`;
+    const attending = attendingRadio ? attendingRadio.value : "No Response";
+
+  
+    const message = document.getElementById('message')?.value || "";
+    const eventCode = document.getElementById("eventCode").value;
+
+    const formData = new URLSearchParams();
+    formData.append("eventCode", eventCode);
+    formData.append("name", name);
+    formData.append("attending", attending);
+    formData.append("message", message);
+    formData.append("timestamp", new Date().toISOString());
+
+try {
+    const response = await fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors", // This bypasses the CORS pre-flight check
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString()
+    });
+
+// NOTE: With 'no-cors', you cannot read response.json(). 
+    // If the catch block isn't triggered, assume it worked.
+    alert("Thank you for your RSVP!");
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Submission failed. Please try again.");
+    }
 }
+
