@@ -1,253 +1,438 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Girum & Edom - Wedding Invitation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://girumedomwedding.com/" />
+    <meta property="og:title" content="Girum & Edom Wedding Invitation" />
+    <meta
+      property="og:description"
+      content="We can't wait to share our special day with you! Please RSVP by clicking here."
+    />
+    <meta
+      property="og:image"
+      content="https://girumedomwedding.com/assets/img_3306.jpeg"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Girum & Edom Wedding" />
-    <meta name="twitter:description" content="Join us for our special day! Click to see the details and RSVP." />
-    <meta name="twitter:image" content="https://girumedomwedding.com/assets/IMG_3306.jpeg" />
+    <meta name="twitter:description" content="Join us for our special day!" />
+    <meta
+      name="twitter:image"
+      content="https://girumedomwedding.com/assets/img_3306.jpeg"
+    />
 
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="index.css" />
-</head>
+  </head>
 
-<body class="locked">
+  <body class="locked">
     <!-- 1. Interactive Envelope Intro -->
     <div id="scene">
-        <div id="envelope-wrapper">
-            <div class="envelope" id="main-envelope" onclick="openEnvelope()">
-                <!-- The Envelope Vector with defined folds -->
-                <div class="letter-card" id="inner-card">
-                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Wedding Invitation</span>
-                    <h2 class="font-serif-elegant text-2xl text-[#8c7c73]">G & E</h2>
+      <div id="envelope-wrapper">
+        <div class="envelope" id="main-envelope" onclick="openEnvelope()">
+          <!-- The Envelope Vector with defined folds -->
+          <div class="letter-card" id="inner-card">
+            <span
+              class="text-[10px] uppercase tracking-widest text-gray-400 mb-2"
+              >Wedding Invitation</span
+            >
+            <h2 class="font-serif-elegant text-2xl text-[#8c7c73]">G & E</h2>
+          </div>
+
+          <svg
+            class="envelope-svg"
+            viewBox="0 0 100 150"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <!-- Paper Texture Overlay -->
+              <filter
+                id="flapShadow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
+                <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" />
+                <feOffset dx="0" dy="1" result="offsetblur" />
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.3" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+
+              <!-- Shading Gradients -->
+              <filter id="paperTexture">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.04"
+                  numOctaves="5"
+                  result="noise"
+                />
+                <feDiffuseLighting
+                  in="noise"
+                  lighting-color="#fff"
+                  surfaceScale="2"
+                >
+                  <feDistantLight azimuth="45" elevation="60" />
+                </feDiffuseLighting>
+              </filter>
+            </defs>
+
+            <!-- Base Paper -->
+            <rect width="100" height="150" fill="#fdfbf9" />
+
+            <!-- Inner Paper (visible when flap opens) -->
+            <rect width="100" height="150" fill="#350606" />
+
+            <!-- 1. Bottom flap (renders first, stays behind sides) -->
+            <path
+              d="M0 150 L50 85 L100 150 Z"
+              fill="#350606"
+              stroke="#4a0808"
+              stroke-width="0.3"
+            />
+
+            <!-- 4. Top flap (The one that opens, stays on top initially) -->
+            <path
+              id="top-flap"
+              d="M0 0 L52 52 L100 -20 Z"
+              fill="#3d0a0a"
+              stroke="#4a0808"
+              stroke-width="0.3"
+            />
+
+            <!-- 2. Left fold (Overlays bottom) -->
+            <path
+              d="M0 0 L90 90 L0 150 Z"
+              fill="#3a0707"
+              stroke="#4a0808"
+              stroke-width="0.3"
+            />
+
+            <!-- 3. Right fold (Overlays bottom) -->
+            <path
+              id="right-flap"
+              d="M100 -20 L30 85 L100 160 Z"
+              fill="#420b0b"
+              stroke="#4a0808"
+              stroke-width="0.3"
+              filter="url(#flapShadow)"
+            />
+
+            <!-- Texture Filter applied via overlay -->
+            <rect
+              width="100"
+              height="150"
+              filter="url(#paperTexture)"
+              opacity="0.05"
+              pointer-events="none"
+            />
+          </svg>
+
+          <!-- Wax Seal -->
+          <div class="wax-seal">
+            <div class="wax-initials">
+              <span>G</span>
+              <div class="initial-divider"></div>
+              <span>E</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Main Invitation (Initially Hidden) -->
+      <div id="main-content" class="opacity-0 transition-opacity duration-1000">
+        <main class="lg:flex lg:h-screen lg:overflow-hidden">
+          <!-- Hero Section -->
+          <section class="triptych-container">
+            <!-- Left Panel -->
+            <div class="triptych-panel panel-side float-up">
+              <div class="absolute inset-0 bg-black/40"></div>
+              <span class="vertical-name right-4">GIRUM</span>
+            </div>
+
+            <!-- Center Panel -->
+            <div class="triptych-panel panel-center">
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#1a0202] via-transparent to-transparent"
+              ></div>
+              <div class="relative z-10 text-center space-y-6">
+                <span
+                  class="text-[#c5a059] uppercase tracking-[0.6em] text-[10px] block"
+                  >We are getting married</span
+                >
+                <h1
+                  class="text-5xl lg:text-7xl font-serif-elegant text-white leading-tight"
+                >
+                  Girum <span class="text-[#c5a059]">&</span> Edom
+                </h1>
+                <p class="text-[11px] text-white/60 tracking-[0.3em] uppercase">
+                  August 01, 2026
+                </p>
+                <div class="pt-6">
+                  <a href="#rsvp" class="btn-rsvp">Open RSVP</a>
                 </div>
+              </div>
+            </div>
 
-                <svg class="envelope-svg" viewBox="0 0 100 150" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <!-- Paper Texture Overlay -->
-                        <filter id="flapShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" />
-                            <feOffset dx="0" dy="1" result="offsetblur" />
-                            <feComponentTransfer>
-                                <feFuncA type="linear" slope="0.3" />
-                            </feComponentTransfer>
-                            <feMerge>
-                                <feMergeNode />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
+            <!-- Right Panel -->
+            <div class="triptych-panel panel-side float-down">
+              <div class="absolute inset-0 bg-black/40"></div>
+              <span class="vertical-name left-4">EDOM</span>
+            </div>
+          </section>
 
-                        <!-- Shading Gradients -->
-                        <filter id="paperTexture">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
-                            <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
-                                <feDistantLight azimuth="45" elevation="60" />
-                            </feDiffuseLighting>
-                        </filter>
-                    </defs>
-
-                    <!-- Base Paper -->
-                    <rect width="100" height="150" fill="#fdfbf9" />
-
-                    <!-- Inner Paper (visible when flap opens) -->
-                    <rect width="100" height="150" fill="#350606" />
-
-                    <!-- 1. Bottom flap (renders first, stays behind sides) -->
-                    <path d="M0 150 L50 85 L100 150 Z" fill="#350606" stroke="#4a0808" stroke-width="0.3" />
-
-                    <!-- 4. Top flap (The one that opens, stays on top initially) -->
-                    <path id="top-flap" d="M0 0 L52 52 L100 -20 Z" fill="#3d0a0a" stroke="#4a0808" stroke-width="0.3" />
-
-                    <!-- 2. Left fold (Overlays bottom) -->
-                    <path d="M0 0 L90 90 L0 150 Z" fill="#3a0707" stroke="#4a0808" stroke-width="0.3" />
-
-                    <!-- 3. Right fold (Overlays bottom) -->
-                    <path id="right-flap" d="M100 -20 L30 85 L100 160 Z" fill="#420b0b" stroke="#4a0808"
-                        stroke-width="0.3" filter="url(#flapShadow)" />
-
-
-                    <!-- Texture Filter applied via overlay -->
-                    <rect width="100" height="150" filter="url(#paperTexture)" opacity="0.05" pointer-events="none" />
+          <!-- Split Right: Info -->
+          <section
+            class="w-full lg:w-2/5 flex flex-col justify-center items-center p-12 lg:p-16 bg-[#FDFBF9] relative"
+          >
+            <div class="text-center z-10 space-y-2">
+              <h2 id="personalized-message"></h2>
+              <p
+                class="text-sm lg:text-base font-light opacity-90 max-w-sm leading-relaxed"
+              >
+                We can't wait to share our special day with you. Help us capture
+                our wedding with Joy.
+              </p>
+              <div class="flex flex-col items-center pt-16">
+                <a
+                  href="#details"
+                  class="text-[10px] uppercase tracking-[0.4em] text-[#8c7c73] mb-4"
+                  >View Details</a
+                >
+                <svg
+                  class="w-6 h-6 text-[#8c7c73] bounce"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
                 </svg>
+              </div>
+            </div>
+          </section>
+        </main>
+        <section class="bg-[#FDFBF9] py-20 px-6 border-b border-gray-100">
+          <div class="max-w-3xl mx-auto text-center">
+            <span
+              class="text-[10px] uppercase tracking-[0.5em] text-[#c5a059] block mb-4"
+              >Our Story</span
+            >
+            <h2 class="text-4xl font-serif-elegant text-gray-800 mb-8">
+              How We Met
+            </h2>
 
-                <!-- Wax Seal -->
-                <div class="wax-seal">
-                    <div class="wax-initials">
-                        <span>G</span>
-                        <div class="initial-divider"></div>
-                        <span>E</span>
-                    </div>
+            <div
+              class="space-y-6 text-gray-600 font-light leading-relaxed text-lg"
+            >
+              <p>
+                We met at a
+                <span class="font-medium text-gray-800">Sami Dan concert</span>
+                in February 2020—pretty much right before the world shut down due to
+                the covid pandemic. A couple of days later, Girum asked Edom on a date. When the big
+                day arrived, however... Girum was nowhere to be found! (Ask him
+                about that later!)
+              </p>
+
+              <p>
+                Soon after, COVID happened and we were all stuck at home. After
+                a year of silence, in March of 2021, a single Facebook friend
+                request changed everything.
+              </p>
+
+              <p class="italic text-[#8c7c73] font-serif-elegant text-2xl pt-4">
+                "The rest is history."
+              </p>
+
+              <p>
+                Who knew that one notification would lead to a lifetime of love
+                and laughter?
+              </p>
+            </div>
+
+            <div class="pt-10 flex justify-center">
+              <div class="w-12 h-[1px] bg-[#c5a059]"></div>
+            </div>
+          </div>
+        </section>
+        <!-- Details & RSVP Area -->
+        <div id="details" class="max-w-4xl mx-auto px-6 py-24 space-y-20">
+          <!-- Countdown -->
+          <section class="text-center scroll-mt-24">
+            <h2 class="text-3xl font-serif-elegant mb-12 text-gray-800">
+              The Countdown
+            </h2>
+            <div
+              id="countdown-timer"
+              class="flex justify-center space-x-6 lg:space-x-12"
+            >
+              <div class="flex flex-col">
+                <span
+                  id="days"
+                  class="text-4xl lg:text-6xl font-bold text-[#c5a059]"
+                  >00</span
+                ><span
+                  class="text-[10px] uppercase tracking-widest text-gray-400"
+                  >Days</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  id="hours"
+                  class="text-4xl lg:text-6xl font-bold text-[#c5a059]"
+                  >00</span
+                ><span
+                  class="text-[10px] uppercase tracking-widest text-gray-400"
+                  >Hours</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  id="minutes"
+                  class="text-4xl lg:text-6xl font-bold text-[#c5a059]"
+                  >00</span
+                ><span
+                  class="text-[10px] uppercase tracking-widest text-gray-400"
+                  >Mins</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span
+                  id="seconds"
+                  class="text-4xl lg:text-6xl font-bold text-[#c5a059]"
+                  >00</span
+                ><span
+                  class="text-[10px] uppercase tracking-widest text-gray-400"
+                  >Secs</span
+                >
+              </div>
+            </div>
+          </section>
+          <section
+            class="image-divider"
+            style="background-image: url(&quot;./assets/img_3264.jpeg&quot;)"
+          ></section>
+          <!-- Venue Info -->
+          <section class="grid md:grid-cols-2 gap-16 border-t border-gray-100">
+            <div>
+              <h3 class="text-2xl font-serif-elegant mb-6 text-[#8c7c73]">
+                Reception
+              </h3>
+              <p class="text-gray-600 leading-relaxed mb-8">
+                Join us for an evening of celebration at<br />
+                <strong>Woodbine Banquet Hall</strong><br />
+                30 Vice Regent Blvd, Toronto, ON M9W 7A4
+              </p>
+              <a
+                href="https://maps.app.goo.gl/na5BdMqiMrCWyZaN6"
+                target="_blank"
+                class="text-sm font-bold border-b border-[#c5a059] text-[#c5a059] pb-1 hover:text-[#8c7c73] transition"
+                >GOOGLE MAPS</a
+              >
+            </div>
+            <div
+              id="rsvp"
+              class="bg-white p-8 lg:p-12 rounded-2xl shadow-sm border border-gray-50 scroll-mt-24"
+            >
+              <h3 class="text-3xl font-serif-elegant mb-6 text-center">RSVP</h3>
+              <p
+                class="text-[11px] text-gray-500 uppercase tracking-widest text-center mb-6 leading-relaxed"
+              >
+                We would love to celebrate with everyone, but due to space
+                limitations, we are unable to extend invitations to additional
+                guests or children. Thank you for your understanding!
+              </p>
+              <form onsubmit="handleRSVP(event)" class="space-y-6">
+                <!-- Name -->
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Full Name"
+                  required
+                  class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent"
+                />
+
+                <!-- Attending -->
+                <div class="flex space-x-8 pt-2">
+                  <label
+                    class="flex items-center space-x-2 cursor-pointer text-sm"
+                  >
+                    <input
+                      type="radio"
+                      name="attending"
+                      value="Yes"
+                      required
+                      class="accent-[#c5a059]"
+                    />
+                    <span>I'm coming!</span>
+                  </label>
+                  <label
+                    class="flex items-center space-x-2 cursor-pointer text-sm"
+                  >
+                    <input
+                      type="radio"
+                      name="attending"
+                      value="No"
+                      class="accent-[#c5a059]"
+                    />
+                    <span>Can't make it</span>
+                  </label>
                 </div>
+
+                <!-- Message -->
+                <div>
+                  <textarea
+                    id="message"
+                    rows="3"
+                    placeholder="Leave a message for us (optional)"
+                    class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Hidden Event Code -->
+                <input
+                  type="hidden"
+                  id="eventCode"
+                  value="GIRUM_EDOM_2026_PRIVATE"
+                />
+
+                <!-- Submit -->
+                <button
+                  type="submit"
+                  class="w-full bg-[#8c7c73] text-white py-4 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-[#c5a059] transition shadow-lg shadow-gray-200"
+                >
+                  Confirm Response
+                </button>
+              </form>
             </div>
+          </section>
         </div>
 
-        <!-- 2. Main Invitation (Initially Hidden) -->
-        <div id="main-content" class="opacity-0 transition-opacity duration-1000">
-
-            <main class="lg:flex lg:h-screen lg:overflow-hidden">
-                <!-- Hero Section -->
-                <section class="triptych-container">
-                    <!-- Left Panel -->
-                    <div class="triptych-panel panel-side float-up">
-                        <div class="absolute inset-0 bg-black/40"></div>
-                        <span class="vertical-name right-4">GIRUM</span>
-                    </div>
-
-                    <!-- Center Panel -->
-                    <div class="triptych-panel panel-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#1a0202] via-transparent to-transparent">
-                        </div>
-                        <div class="relative z-10 text-center space-y-6">
-                            <span class="text-[#c5a059] uppercase tracking-[0.6em] text-[10px] block">We are getting
-                                married</span>
-                            <h1 class="text-5xl lg:text-7xl font-serif-elegant text-white leading-tight">Girum <span
-                                    class="text-[#c5a059]">&</span> Edom</h1>
-                            <p class="text-[11px] text-white/60 tracking-[0.3em] uppercase">August 01, 2026
-                            </p>
-                            <div class="pt-6">
-                                <a href="#rsvp" class="btn-rsvp">Open RSVP</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Panel -->
-                    <div class="triptych-panel panel-side float-down">
-                        <div class="absolute inset-0 bg-black/40"></div>
-                        <span class="vertical-name left-4">EDOM</span>
-                    </div>
-                </section>
-                <!-- <section class="image-divider" style="background-image:url('./assets/IMG_3306.jpeg')"></section> -->
-
-                <!-- Split Right: Info -->
-                <section
-                    class="w-full lg:w-2/5 flex flex-col justify-center items-center p-12 lg:p-16 bg-[#FDFBF9] relative">
-                    <div class="text-center z-10 space-y-2">
-                        <h2 id="personalized-message"></h2>
-                        <p class="text-sm lg:text-base font-light opacity-90 max-w-sm leading-relaxed">
-                            We can't wait to share our special day with you. Help us capture
-                            our wedding with Joy.
-                        </p>
-                        <div class="flex flex-col items-center pt-16">
-                            <a href="#details" class="text-[10px] uppercase tracking-[0.4em] text-[#8c7c73] mb-4">View
-                                Details</a>
-                            <svg class="w-6 h-6 text-[#8c7c73] bounce" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M19 9l-7 7-7-7">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <!-- Details & RSVP Area -->
-            <div id="details" class="max-w-4xl mx-auto px-6 py-24 space-y-20">
-                <!-- Countdown -->
-                <section class="text-center scroll-mt-24">
-                    <h2 class="text-3xl font-serif-elegant mb-12 text-gray-800">
-                        The Countdown
-                    </h2>
-                    <div id="countdown-timer" class="flex justify-center space-x-6 lg:space-x-12">
-                        <div class="flex flex-col">
-                            <span id="days" class="text-4xl lg:text-6xl font-bold text-[#c5a059]">00</span><span
-                                class="text-[10px] uppercase tracking-widest text-gray-400">Days</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <span id="hours" class="text-4xl lg:text-6xl font-bold text-[#c5a059]">00</span><span
-                                class="text-[10px] uppercase tracking-widest text-gray-400">Hours</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <span id="minutes" class="text-4xl lg:text-6xl font-bold text-[#c5a059]">00</span><span
-                                class="text-[10px] uppercase tracking-widest text-gray-400">Mins</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <span id="seconds" class="text-4xl lg:text-6xl font-bold text-[#c5a059]">00</span><span
-                                class="text-[10px] uppercase tracking-widest text-gray-400">Secs</span>
-                        </div>
-                    </div>
-                </section>
-                <section class="image-divider" style="background-image:url('./assets/IMG_3264.jpeg')"></section>
-                <!-- Venue Info -->
-                <section class="grid md:grid-cols-2 gap-16 border-t border-gray-100">
-                    <div>
-                        <h3 class="text-2xl font-serif-elegant mb-6 text-[#8c7c73]">
-                            Reception
-                        </h3>
-                        <p class="text-gray-600 leading-relaxed mb-8">
-                            Join us for an evening of celebration at<br />
-                            <strong>Woodbine Banquet Hall</strong><br />
-                            30 Vice Regent Blvd, Toronto, ON M9W 7A4
-                        </p>
-                        <a href="https://maps.app.goo.gl/na5BdMqiMrCWyZaN6" target="_blank"
-                            class="text-sm font-bold border-b border-[#c5a059] text-[#c5a059] pb-1 hover:text-[#8c7c73] transition">GOOGLE
-                            MAPS</a>
-                    </div>
-                    <div id="rsvp"
-                        class="bg-white p-8 lg:p-12 rounded-2xl shadow-sm border border-gray-50 scroll-mt-24">
-                        <h3 class="text-3xl font-serif-elegant mb-6 text-center">RSVP</h3>
-                        <p class="text-[11px] text-gray-500 uppercase tracking-widest text-center mb-6 leading-relaxed">
-                            We would love to celebrate with everyone, but due to space limitations, we are unable to
-                            extend invitations to additional guests or children. Thank you for your understanding!
-                        </p>
-                        <form onsubmit="handleRSVP(event)" class="space-y-6">
-
-                            <!-- Name -->
-                            <input type="text" id="name" placeholder="Full Name" required
-                                class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent" />
-
-                            <!-- Attending -->
-                            <div class="flex space-x-8 pt-2">
-                                <label class="flex items-center space-x-2 cursor-pointer text-sm">
-                                    <input type="radio" name="attending" value="Yes" required
-                                        class="accent-[#c5a059]" />
-                                    <span>I'm coming!</span>
-                                </label>
-                                <label class="flex items-center space-x-2 cursor-pointer text-sm">
-                                    <input type="radio" name="attending" value="No" class="accent-[#c5a059]" />
-                                    <span>Can't make it</span>
-                                </label>
-                            </div>
-
-                            <!-- Message -->
-                            <div>
-                                <textarea id="message" rows="3" placeholder="Leave a message for us (optional)"
-                                    class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent resize-none"></textarea>
-                            </div>
-
-                            <!-- Hidden Event Code -->
-                            <input type="hidden" id="eventCode" value="GIRUM_EDOM_2026_PRIVATE" />
-
-                            <!-- Submit -->
-                            <button type="submit"
-                                class="w-full bg-[#8c7c73] text-white py-4 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-[#c5a059] transition shadow-lg shadow-gray-200">
-                                Confirm Response
-                            </button>
-
-                        </form>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Footer -->
-            <footer class="py-12 text-center text-xs uppercase tracking-[0.5em] text-gray-400 bg-gray-50/50">
-                Girum & Edom • 08.01.26
-            </footer>
-        </div>
+        <!-- Footer -->
+        <footer
+          class="py-12 text-center text-xs uppercase tracking-[0.5em] text-gray-400 bg-gray-50/50"
+        >
+          Girum & Edom • 08.01.26
+        </footer>
+      </div>
     </div>
 
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>
