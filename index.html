@@ -149,7 +149,7 @@
             </main>
 
             <!-- Details & RSVP Area -->
-            <div id="details" class="max-w-4xl mx-auto px-6 py-24 space-y-32">
+            <div id="details" class="max-w-4xl mx-auto px-6 py-24 space-y-20">
                 <!-- Countdown -->
                 <section class="text-center scroll-mt-24">
                     <h2 class="text-3xl font-serif-elegant mb-12 text-gray-800">
@@ -176,17 +176,17 @@
                 </section>
                 <section class="image-divider" style="background-image:url('./assets/IMG_3264.jpeg')"></section>
                 <!-- Venue Info -->
-                <section class="grid md:grid-cols-2 gap-16 border-t border-gray-100 pt-24">
+                <section class="grid md:grid-cols-2 gap-16 border-t border-gray-100">
                     <div>
                         <h3 class="text-2xl font-serif-elegant mb-6 text-[#8c7c73]">
                             Ceremony & Reception
                         </h3>
                         <p class="text-gray-600 leading-relaxed mb-8">
                             Join us for an evening of celebration at<br />
-                            <strong>The Royal York Hall</strong><br />
-                            100 Front St W, Toronto, ON M5J 1E3
+                            <strong>Woodbine Banquet Hall</strong><br />
+                            30 Vice Regent Blvd, Toronto, ON M9W 7A4
                         </p>
-                        <a href="https://maps.google.com" target="_blank"
+                        <a href="https://maps.app.goo.gl/na5BdMqiMrCWyZaN6" target="_blank"
                             class="text-sm font-bold border-b border-[#c5a059] text-[#c5a059] pb-1 hover:text-[#8c7c73] transition">GOOGLE
                             MAPS</a>
                     </div>
@@ -194,8 +194,12 @@
                         class="bg-white p-8 lg:p-12 rounded-2xl shadow-sm border border-gray-50 scroll-mt-24">
                         <h3 class="text-3xl font-serif-elegant mb-6 text-center">RSVP</h3>
                         <form onsubmit="handleRSVP(event)" class="space-y-6">
+
+                            <!-- Name -->
                             <input type="text" id="name" placeholder="Full Name" required
                                 class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent" />
+
+                            <!-- Attending -->
                             <div class="flex space-x-8 pt-2">
                                 <label class="flex items-center space-x-2 cursor-pointer text-sm">
                                     <input type="radio" name="attending" value="Yes" required
@@ -207,10 +211,22 @@
                                     <span>Can't make it</span>
                                 </label>
                             </div>
+
+                            <!-- Message -->
+                            <div>
+                                <textarea id="message" rows="3" placeholder="Leave a message for us (optional)"
+                                    class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent resize-none"></textarea>
+                            </div>
+
+                            <!-- Hidden Event Code -->
+                            <input type="hidden" id="eventCode" value="GIRUM_EDOM_2026_PRIVATE" />
+
+                            <!-- Submit -->
                             <button type="submit"
                                 class="w-full bg-[#8c7c73] text-white py-4 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-[#c5a059] transition shadow-lg shadow-gray-200">
                                 Confirm Response
                             </button>
+
                         </form>
                     </div>
                 </section>
