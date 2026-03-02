@@ -21,7 +21,7 @@ function openEnvelope() {
     setTimeout(() => {
         document.body.classList.remove("locked");
         // Ensure we are at the top of the content
-        content.scrollTop = 0;
+     window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 1000);
 }
 
@@ -73,15 +73,24 @@ setInterval(() => {
 }, 1000);
 
 // 4. RSVP Action
+// 4. RSVP Action
 async function handleRSVP(e) {
     e.preventDefault();
+    
+    // Get button and original text for feedback
+    const btn = e.target.querySelector('button[type="submit"]');
+    const originalText = btn.innerText;
+    
+    // 1. Disable and Show Loading State
+    btn.disabled = true;
+    btn.innerText = "SENDING...";
+    btn.classList.add('opacity-70', 'cursor-not-allowed');
+
     const API_URL = "https://script.google.com/macros/s/AKfycbyZEmoP_S84klNGUj-A22coE1tSBd-0oo-ROBK0kyO1uZbPS33cfhFWPQWhwbNkcqM/exec";
 
     const name = document.getElementById('name').value;
     const attendingRadio = document.querySelector('input[name="attending"]:checked');
     const attending = attendingRadio ? attendingRadio.value : "No Response";
-
-  
     const message = document.getElementById('message')?.value || "";
     const eventCode = document.getElementById("eventCode").value;
 
@@ -92,24 +101,28 @@ async function handleRSVP(e) {
     formData.append("message", message);
     formData.append("timestamp", new Date().toISOString());
 
-try {
-    const response = await fetch(API_URL, {
-        method: "POST",
-        mode: "no-cors", // This bypasses the CORS pre-flight check
-        cache: "no-cache",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData.toString()
-    });
+    try {
+        await fetch(API_URL, {
+            method: "POST",
+            mode: "no-cors", 
+            cache: "no-cache",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData.toString()
+        });
 
-// NOTE: With 'no-cors', you cannot read response.json(). 
-    // If the catch block isn't triggered, assume it worked.
-    alert("Thank you for your RSVP!");
+        // 2. Success State
+        btn.innerText = "THANK YOU!";
+        btn.classList.replace('bg-[#8c7c73]', 'bg-green-600');
+        alert("Thank you for your RSVP!");
 
     } catch (error) {
         console.error("Error:", error);
         alert("Submission failed. Please try again.");
+        
+        // 3. Reset Button on Error so they can try again
+        btn.disabled = false;
+        btn.innerText = originalText;
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
     }
 }
 
