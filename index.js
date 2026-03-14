@@ -36,12 +36,22 @@ if (guestName) {
     let finalDisplay;
 
     // conditional check: split only if "and" is found
-    if (names.toLowerCase().includes('and')) {
+    const count = (names.match(/and/g) || []).length;
+    if (count === 1) {
         console.log(names)
         finalDisplay = names.split('and').map((name) => {
             const trimmed = name.trim();
             return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
         }).join(' & ');
+    } else if (count > 1) {
+        const parts = names.split(/\s*and\s*/i).map(name => {
+            const trimmed = name.trim();
+            return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+        });
+
+        // Join all except the last one with commas, then add the last one with &
+        const lastPart = parts.pop();
+        finalDisplay = parts.join(', ') + ' & ' + lastPart;
     } else {
         // 3. Fallback: Just capitalize the single name
         finalDisplay = names.charAt(0).toUpperCase() + names.slice(1);
