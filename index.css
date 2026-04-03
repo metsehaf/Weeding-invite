@@ -10,6 +10,7 @@
     /* Darker variant for gradients */
     --card-burgundy: #3d0a0a;
     --text-brown: #8c7c73;
+    --open-rsvp: #a3a3a3;
     --envelope-cream: #ffffff;
     --wax-gold: #c5a059;
     --table-burgundy: #2d0a0a;
@@ -317,7 +318,7 @@ body {
 
 /* --- CONTENT STYLES --- */
 .hero-image {
-    background-image: url("./assets/IMG_3306.jpeg");
+    background-image: url("./assets/banner.webp");
     background-size: cover;
     background-position: center;
 }
@@ -343,7 +344,7 @@ body {
             overflow: hidden;
             background: var(--bg-burgundy-dark);
             /* Set the shared background image here */
-            background-image: url('./assets/IMG_3306.jpeg');
+            background-image: url('./assets/banner.webp');
             background-size: cover;
             background-position: center;
         }
@@ -392,11 +393,12 @@ body {
         @media (max-width: 768px) {
             .triptych-container { grid-template-columns: 1fr; padding: 1rem; }
             .panel-side { display: none; }
-            .panel-center { height: 80vh; margin-top: 10vh; }
+            .panel-center { height: 75vh;
+        margin-top: 15vh; }
         }
 .btn-rsvp {
-    border: 1px solid var(--text-brown);
-    color: var(--text-brown);
+    border: 3px solid var(--text-brown);
+    color: var(--open-rsvp);
     padding: 0.6rem 2.5rem;
     border-radius: 9999px;
     transition: all 0.3s ease;
