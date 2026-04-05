@@ -239,15 +239,18 @@ body {
 }
 
 @keyframes floatSideToSide {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(20px); /* Adjust this for more/less movement */
-  }
-  100% {
-    transform: translateX(0);
-  }
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(20px);
+        /* Adjust this for more/less movement */
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 @media (max-width: 640px) {
@@ -333,69 +336,105 @@ body {
 }
 
 /* --- HERO TRIPTYCH DESIGN --- */
-        .triptych-container {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            gap: 1.5rem;
-            width: 100%;
-            height: 100vh;
-            padding: 2rem;
-            align-items: center;
-            overflow: hidden;
-            background: var(--bg-burgundy-dark);
-            /* Set the shared background image here */
-            background-image: url('./assets/banner.webp');
-            background-size: cover;
-            background-position: center;
-        }
+.triptych-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    align-items: center;
+    overflow: hidden;
+    background: var(--bg-burgundy-dark);
+    /* Set the shared background image here */
+    background-image: url('./assets/banner.webp');
+    background-size: cover;
+    background-position: center;
+}
 
-        .triptych-panel {
-            position: relative;
-            height: 85vh;
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            overflow: hidden;
-            /* Semi-transparent background to let the shared image through */
-            background: rgba(26, 2, 2, 0.2);
-            backdrop-filter: blur(2px);
-        }
+.triptych-panel {
+    position: relative;
+    height: 85vh;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    overflow: hidden;
+    /* Semi-transparent background to let the shared image through */
+    background: rgba(26, 2, 2, 0.2);
+    backdrop-filter: blur(2px);
+}
 
-        .panel-center {
-            height: 95vh;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 3rem;
-            background: transparent;
-            backdrop-filter: none;
-        }
+.panel-center {
+    height: 95vh;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    background: transparent;
+    backdrop-filter: none;
+}
 
-        /* Animations */
-        .float-up { animation: floatUp 6s ease-in-out infinite; }
-        .float-down { animation: floatDown 6s ease-in-out infinite; }
+/* Animations */
+.float-up {
+    animation: floatUp 6s ease-in-out infinite;
+}
 
-        @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @keyframes floatDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+.float-down {
+    animation: floatDown 6s ease-in-out infinite;
+}
 
-        .vertical-name {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            position: absolute;
-            top: 2rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.8em;
-            text-transform: uppercase;
-            color: var(--primary-gold);
-            opacity: 0.8;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
+@keyframes floatUp {
 
-        @media (max-width: 768px) {
-            .triptych-container { grid-template-columns: 1fr; padding: 1rem; }
-            .panel-side { display: none; }
-            .panel-center { height: 75vh;
-        margin-top: 15vh; }
-        }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes floatDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+.vertical-name {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: absolute;
+    top: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.8em;
+    text-transform: uppercase;
+    color: var(--primary-gold);
+    opacity: 0.8;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .triptych-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .panel-side {
+        display: none;
+    }
+
+    .panel-center {
+        height: 75vh;
+        margin-top: 15vh;
+    }
+}
+
 .btn-rsvp {
     border: 3px solid var(--text-brown);
     color: var(--open-rsvp);
@@ -418,12 +457,19 @@ html {
 }
 
 button:disabled {
-  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
 }
 
 @keyframes bounce {
