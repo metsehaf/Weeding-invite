@@ -108,7 +108,7 @@ async function handleRSVP(e) {
     btn.innerText = "SENDING...";
     btn.classList.add('opacity-70', 'cursor-not-allowed');
 
-    const API_URL = "https://script.google.com/macros/s/AKfycbyZEmoP_S84klNGUj-A22coE1tSBd-0oo-ROBK0kyO1uZbPS33cfhFWPQWhwbNkcqM/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbz35_2OM2R0CFBflSP3OWsb1CzSZ_4nmM9hCFDBTpC34XuZeI9GY_3MX3yqMP2EGXeB/exec";
 
     const name = document.getElementById('name').value;
     const guestName = document.getElementById('guest-name').value;
