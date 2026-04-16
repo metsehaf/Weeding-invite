@@ -145,9 +145,11 @@
             </p>
             <div class="flex flex-col items-center pt-16">
               <a href="#details" class="text-[10px] uppercase tracking-[0.4em] text-[#8c7c73] mb-4">View Details</a>
+              <a href="#details" class="text-[10px] uppercase tracking-[0.4em] text-[#8c7c73] mb-4">
               <svg class="w-6 h-6 text-[#8c7c73] bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
               </svg>
+              </a>
             </div>
           </div>
         </section>
@@ -227,7 +229,7 @@
               <strong>Woodbine Banquet Hall</strong><br />
               30 Vice Regent Blvd, Toronto, ON M9W 7A4
             </p>
-            <p class="text-gray-600 leading-relaxed mb-8">August 1st, 2026 at 5:30PM</p>
+            <p class="text-gray-600 leading-relaxed mb-8">August 1st, 2026 at 6 PM</p>
             <a href="https://maps.app.goo.gl/na5BdMqiMrCWyZaN6" target="_blank"
               class="text-sm font-bold border-b border-[#c5a059] text-[#c5a059] pb-1 hover:text-[#8c7c73] transition">GOOGLE
               MAPS</a>
@@ -244,7 +246,8 @@
               <!-- Name -->
               <input type="text" id="name" placeholder="Full Name" required
                 class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent" />
-
+              <input type="text" id="guest-name" placeholder="Guest Name" hidden
+                class="w-full border-b border-gray-200 py-3 focus:border-[#c5a059] outline-none bg-transparent" />
               <!-- Attending -->
               <div class="flex space-x-8 pt-2">
                 <label class="flex items-center space-x-2 cursor-pointer text-sm">

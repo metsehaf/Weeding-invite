@@ -31,15 +31,27 @@ document.body.style.overflow = 'hidden';
 // 2. Personalized Greeting
 const params = new URLSearchParams(window.location.search);
 const guestName = params.get('name');
+console.log('guestName', guestName)
 if (guestName) {
     let names = decodeURIComponent(guestName.replace(/\+/g, ' ')).trim();
     let finalDisplay;
 
     // conditional check: split only if "and" is found
     const count = (names.match(/and/g) || []).length;
+    const guestNameInput = document.getElementById('guest-name');
+    if (guestNameInput) {
+        if (count >= 1) {
+            guestNameInput.hidden = false;
+            guestNameInput.required = true;
+        } else {
+            guestNameInput.hidden = true;
+            guestNameInput.required = false;
+        }
+    }
+    console.log('count', count)
     if (count === 1) {
         console.log(names)
-        finalDisplay = names.split('and').map((name) => {
+        finalDisplay = names.split(/\s*and\s*/i).map((name) => {
             const trimmed = name.trim();
             return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
         }).join(' & ');
@@ -99,6 +111,7 @@ async function handleRSVP(e) {
     const API_URL = "https://script.google.com/macros/s/AKfycbyZEmoP_S84klNGUj-A22coE1tSBd-0oo-ROBK0kyO1uZbPS33cfhFWPQWhwbNkcqM/exec";
 
     const name = document.getElementById('name').value;
+    const guestName = document.getElementById('guest-name').value;
     const attendingRadio = document.querySelector('input[name="attending"]:checked');
     const attending = attendingRadio ? attendingRadio.value : "No Response";
     const message = document.getElementById('message')?.value || "";
@@ -106,6 +119,7 @@ async function handleRSVP(e) {
 
     const formData = new URLSearchParams();
     formData.append("eventCode", eventCode);
+    formData.append('guestName', guestName)
     formData.append("name", name);
     formData.append("attending", attending);
     formData.append("message", message);
